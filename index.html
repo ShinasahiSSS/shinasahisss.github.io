@@ -476,7 +476,7 @@ document.getElementById("menu").classList.toggle("active");
 ============================== */
 
 const OWNER="ShinasahiSSS";
-const REPO="test";
+const REPO="";
 const PATH="photo";
 
 let photos=[];
@@ -526,7 +526,7 @@ main.style.opacity=1;
 }
 /* お知らせ */
 
-fetch("https://raw.githubusercontent.com/ShinasahiSSS/test/main/oshirase.txt")
+fetch("https://raw.githubusercontent.com/ShinasahiSSS/oshirase.txt")
 .then(res=>res.text())
 .then(data=>{
 document.getElementById("news-content").innerText=data;

@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新旭サッカースポーツ少年団 | 公式サイト</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="emblem.png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:#0b0f1a;color:#fff;}
+a{text-decoration:none;color:inherit;}
+
+header{
+position:fixed;width:100%;
+background:rgba(0,0,40,0.9);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+.nav{
+max-width:1100px;margin:auto;
+display:flex;justify-content:space-between;
+align-items:center;padding:15px 20px;
+}
+
+.logo{font-weight:900;}
+
+.nav ul{display:flex;gap:25px;list-style:none;}
+
+.menu-toggle{display:none;font-size:26px;cursor:pointer;}
+
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,40,0.75),rgba(0,0,40,0.9)),
+url("image/anime.jpg") center/cover no-repeat;
+display:flex;justify-content:center;
+align-items:center;text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:clamp(22px,6vw,48px);
+line-height:1.4;
+font-weight:900;
+letter-spacing:2px;
+text-shadow:0 5px 25px rgba(0,0,0,0.7);
+}
+
+.hero p{
+margin-top:25px;
+font-size:18px;
+opacity:0.9;
+}
+
+.cta{margin-top:40px;}
+
+.cta a{
+display:inline-block;
+padding:14px 30px;
+background:#00d4ff;
+color:#000;
+border-radius:30px;
+font-weight:700;
+transition:0.3s;}
+
+.cta a:hover{background:#fff;}
+
+section{
+padding:100px 20px;
+max-width:1000px;
+margin:auto;}
+
+section h2{
+font-size:28px;margin-bottom:30px;
+border-left:5px solid #00d4ff;
+padding-left:15px;}
+
+section h3{
+font-size:24px;
+margin-top:25px;}
+
+.info-box{
+background:#12182a;
+padding:25px;
+border-radius:12px;
+line-height:1.8;}
+
+/* スタッフ */
+
+.staff-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:25px;
+margin-top:20px;
+text-align:center;}
+
+.staff{
+background:#0f1528;
+padding:15px;
+border-radius:12px;
+transition:0.25s;
+}
+
+.staff:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+.staff img{
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:50%;
+margin:auto;
+display:block;
+border:3px solid #00d4ff;}
+
+.staff-name{
+margin-top:10px;
+font-weight:700;
+font-size:14px;}
+
+/* スケジュール */
+
+.schedule-table{
+width:100%;
+border-collapse:collapse;
+text-align:center;}
+   
+.schedule-table th,
+.schedule-table td{
+border:1px solid #2a324f;
+padding:12px;}
+
+.schedule-table th{
+background:#1a2340;}
+
+/* 月予定 */
+
+#monthly img{
+width:100%;
+max-width:800px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+
+/* 活動写真 */
+
+.photo-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,80px);
+gap:8px;
+justify-content:center;}
+.photo-grid img{
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:6px;
+cursor:pointer;
+transition:0.2s;}
+
+.photo-grid img:hover{
+transform:scale(1.08);}
+
+/* フッター */
+footer{
+background:#050814;
+text-align:center;
+padding:30px;
+color:#aaa;}
+
+/* スマホ */
+@media(max-width:768px){
+.nav ul{
+position:absolute;
+top:60px;
+right:0;
+background:#111a30;
+flex-direction:column;
+width:200px;
+display:none;
+padding:20px;}
+
+.nav ul.active{display:flex;}
+.menu-toggle{display:block;}
+.hero p{font-size:18px;}
+
+.schedule-table th,
+.schedule-table td{
+font-size:14px;
+padding:8px;}
+
+.staff-grid{
+grid-template-columns:repeat(3,1fr);
+gap:20px;}
+.staff img{
+width:70px;
+height:70px;}
+}
+
+/* エンブレム透かし */
+.watermark{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:-1;
+pointer-events:none;
+opacity:0.40}
+
+.watermark img{
+width:400px;
+height:auto;}
+
+#news-content{
+white-space:pre-line;
+line-height:1.8;
+}
+
+.gallery{
+max-width:900px;
+margin:auto;
+}
+
+.main-photo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.main-photo img{
+max-width:100%;
+max-height:70vh;
+width:auto;
+height:auto;
+object-fit:contain;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+.photo-grid img{
+cursor:pointer;
+height:90px;
+object-fit:cover;
+}
+   
+body::before{
+content:"";
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:70vw;
+height:70vw;
+background:url("sukashi.png") no-repeat center;
+background-size:contain;
+opacity:0.06;
+pointer-events:none;
+z-index:-1;}   
+.main-photo img{
+transition:opacity 0.4s;}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="nav">
+<div class="logo">新旭サッカースポーツ少年団</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<ul id="menu">
+<li><a href="#news">お知らせ</a></li>
+<li><a href="#about">チーム紹介</a></li>
+<li><a href="#schedule">活動スケジュール</a></li>
+<li><a href="#monthly">今月の予定</a></li>
+<li><a href="#photos">活動写真</a></li>
+<li><a href="#contact">体験参加</a></li>
+</ul>
+</div>
+</header>
+
+
+<!-- ヒーロー -->
+
+<div class="hero">
+<div>
+<h1>この数年間が土台になる。</h1>
+<p>勝敗よりも、折れない心を。</p>
+<div class="cta">
+<a href="#contact">体験に行ってみる</a>
+</div>
+</div>
+</div>
+<!お知らせ>
+<section id="news">
+<h2>📢 お知らせ</h2>
+<div class="info-box">
+<div id="news-content">読み込み中...</div>
+</div>
+
+</section>   
+<!-- チーム紹介 -->
+<section id="about">
+<h2>チーム紹介</h2>
+<div class="info-box">
+<p>技術向上だけでなく、あいさつ、努力、仲間を思いやる心を大切にしています。</p>
+<p>小さな成功体験の積み重ねが、やがて大きな自信へとつながります。</p>
+<h3>指導理念</h3>
+<p>
+・サッカーは"遊び"。楽しくなければ何の意味もない<br>
+・フェアプレーで戦う<br>
+・誰にでも挨拶する<br>
+・スポーツ少年団を通し、地域・社会に貢献する</p>
+
+
+<h3>指導方針</h3>
+
+<p>
+・目標を達成するためにクリエイティブな選手の育成<br>
+・指導者が子供からサッカーの楽しみを奪う事の無いよう留意<br>
+・持ち上がり方式により基本から戦術にいたるまで一貫指導を目標</p>
+
+<h3>スタッフ</h3>
+<div class="staff-grid">
+<div class="staff">
+<img src="staff/staff5.jpg">
+<div class="staff-name">代表<br>
+山本</div>
+</div>
+
+<div class="staff">
+<img src="staff/staff2.jpg">
+<div class="staff-name">監督<br>
+水谷</div>
+</div>
+
+<div class="staff">
+<img src="staff/staff3.jpg">
+<div class="staff-name">コーチ<br>
+宮本</div>
+</div>
+
+<div class="staff">
+<img src="staff/staff1.jpg">
+<div class="staff-name">コーチ<br>
+前川</div>
+</div>
+
+<div class="staff">
+<img src="staff/staff4.jpg">
+<div class="staff-name">コーチ<br>
+山本</div>
+</div>
+
+<div class="staff">
+<img src="staff/staff6.jpg">
+<div class="staff-name">コーチ<br>
+平井</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 練習 -->
+<!-- 活動スケジュール -->
+<section id="schedule">
+<h2>活動スケジュール</h2>
+<div class="info-box">
+<table class="schedule-table">
+
+<tr>
+<th>曜日</th>
+<th>時間</th>
+<th>場所</th>
+<th>対象</th>
+</tr>
+
+<tr>
+<td>土曜日<br>
+（大会の場合あり）</td>
+<td>9:00〜11:30</td>
+<td>新旭北小学校グラウンド</td>
+<td>全学年</td>
+</tr>
+
+<tr>
+<td>日曜日<br>
+（大会の場合あり）</td>
+<td>9:00〜11:30</td>
+<td>新旭北小学校グラウンド<br>
+（雨天時：新旭南小体育館）
+</td>
+<td>全学年</td>
+</tr>
+
+<tr>
+<td>月曜日<br>
+（隔週）</td>
+<td>19:00〜20:00</td>
+<td>森林スポーツ公園</td>
+<td>全学年</td>
+</tr>
+<tr>
+<td>水曜日</td>
+<td>19:00〜20:30</td>
+<td>新旭南小体育館</td>
+<td>１～３年生</td>
+</tr>
+
+<tr>
+<td>木曜日</td>
+<td>19:00〜20:30</td>
+<td>新旭南小体育館</td>
+<td>４～６年生</td>
+</tr>
+   
+</table>
+
+<p style="margin-top:20px;font-size:14px;opacity:0.8;">
+※天候や大会により変更になる場合があります。<br>
+</p>
+</div>
+</section>
+
+<!-- 今月の予定 -->
+<section id="monthly">
+<h2>📅 今月の予定</h2>
+<div class="info-box" style="text-align:center;">
+<img src="schedule.jpg">
+</div>
+</section>
+
+<!-- 活動写真 -->
+<section id="photos">
+<h2>📸 活動写真</h2>
+<div class="info-box">
+<div class="gallery">
+<div class="main-photo">
+<img id="mainPhoto">
+</div>
+<div class="photo-grid" id="photoGrid"></div>
+
+</div>
+</div>
+</section>
+   
+<!-- 体験 -->
+<section id="contact">
+<h2>体験参加について</h2>
+<div class="info-box">
+<h3>新入団員随時募集中です！！</h3>
+<p>まずは体験として土・日の練習に参加してみませんか？<br>
+事前連絡なしで直接北小Grにお越しいただいて構いません！</p>
+<p>ご不明点があればお気軽にお電話ください。</p>
+<p style="margin-top:15px;">
+📞 090-1593-5655（代表：山本）
+</p>
+</div>
+</section>
+<footer>
+
+© 2026 新旭サッカースポーツ少年団
+</footer>
+
+
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("active");
+}
+
+/* ==============================
+   GitHub REST API 写真自動取得
+============================== */
+
+const OWNER="ShinasahiSSS";
+const REPO="test";
+const PATH="photo";
+
+let photos=[];
+let current=0;
+
+async function loadPhotos(){
+
+try{
+
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+const res=await fetch(api);
+const files=await res.json();
+
+photos = files
+.filter(file=>file.type==="file")
+.filter(file=>file.name.match(/\.(jpg|jpeg|png|webp)$/i))
+.map(file=>file.download_url);
+
+const grid=document.getElementById("photoGrid");
+
+grid.innerHTML="";
+
+photos.forEach((url,i)=>{
+
+const img=document.createElement("img");
+img.src=url;
+
+img.onclick=()=>{
+showPhoto(i);
+};
+grid.appendChild(img);
+});
+
+showPhoto(0);
+}catch(e){
+console.error("写真取得エラー",e);
+}
+}
+function showPhoto(index){
+const main=document.getElementById("mainPhoto");
+main.style.opacity=0;
+setTimeout(()=>{
+main.src=photos[index];
+main.style.opacity=1;
+},200);
+
+}
+/* お知らせ */
+
+fetch("https://raw.githubusercontent.com/ShinasahiSSS/test/main/oshirase.txt")
+.then(res=>res.text())
+.then(data=>{
+document.getElementById("news-content").innerText=data;
+});
+loadPhotos();
+   
+   
+</script>
+
+</body>
+</html>
